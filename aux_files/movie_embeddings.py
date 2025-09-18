@@ -6,6 +6,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 class Command(BaseCommand):
+<<<<<<< HEAD
     # Calcular la similitud entre un prompt y las películas
     prompt = "película sobre la Segunda Guerra Mundial"
     prompt_emb = get_embedding(prompt)
@@ -13,6 +14,8 @@ class Command(BaseCommand):
     sim_prompt_movie2 = cosine_similarity(prompt_emb, emb2)
     self.stdout.write(f"📄 Similitud prompt vs '{movie1.title}': {sim_prompt_movie1:.4f}")
     self.stdout.write(f"📄 Similitud prompt vs '{movie2.title}': {sim_prompt_movie2:.4f}")
+=======
+>>>>>>> d6abb902e5e492795f73928d924235bfa05495b0
     help = "Generate and store embeddings for all movies in the database"
 
     def handle(self, *args, **kwargs):
@@ -31,6 +34,7 @@ class Command(BaseCommand):
             )
             return np.array(response.data[0].embedding, dtype=np.float32)
 
+<<<<<<< HEAD
         def cosine_similarity(a, b):
             return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
@@ -52,3 +56,17 @@ class Command(BaseCommand):
             self.stdout.write(f"📄 Similitud prompt vs '{movie2.title}': {sim_prompt_movie2:.4f}")
         except Exception as e:
             self.stderr.write(f"❌ Error calculating similarity: {e}")
+=======
+        # ✅ Iterate through movies and generate embeddings
+        for movie in movies:
+            try:
+                emb = get_embedding(movie.description)
+                # ✅ Store embedding as binary in the database
+                movie.emb = emb.tobytes()
+                movie.save()
+                self.stdout.write(self.style.SUCCESS(f"✅ Embedding stored for: {movie.title}"))
+            except Exception as e:
+                self.stderr.write(f"❌ Failed to generate embedding for {movie.title}: {e}")
+
+        self.stdout.write(self.style.SUCCESS("🎯 Finished generating embeddings for all movies"))
+>>>>>>> d6abb902e5e492795f73928d924235bfa05495b0

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.views import View
 import numpy as np
 import os
@@ -44,21 +45,29 @@ class RecommendMovieView(View):
             "best_movie": best_movie,
             "similarity": f"{max_similarity:.4f}"
         })
+=======
+>>>>>>> d6abb902e5e492795f73928d924235bfa05495b0
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from .models import Movie
+<<<<<<< HEAD
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from openai_connect import get_completion
 from django.views.decorators.csrf import csrf_exempt
+=======
+>>>>>>> d6abb902e5e492795f73928d924235bfa05495b0
 
 import matplotlib.pyplot as plt
 import matplotlib
 import io
 import urllib, base64
+<<<<<<< HEAD
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+=======
+>>>>>>> d6abb902e5e492795f73928d924235bfa05495b0
 
 def home(request):
     #return HttpResponse('<h1>Welcome to Home Page</h1>')
@@ -174,6 +183,7 @@ def generate_bar_chart(data, xlabel, ylabel):
     image_png = buffer.getvalue()
     buffer.close()
     graphic = base64.b64encode(image_png).decode('utf-8')
+<<<<<<< HEAD
     return graphic
 
 @csrf_exempt
@@ -193,3 +203,6 @@ def update_movie_descriptions(request):
             break  # Solo actualiza una película por ejecución
         return HttpResponse("Descripción actualizada para una película.")
     return HttpResponse("Método no permitido.", status=405)
+=======
+    return graphic
+>>>>>>> d6abb902e5e492795f73928d924235bfa05495b0
